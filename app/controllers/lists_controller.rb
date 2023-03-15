@@ -9,10 +9,11 @@ class ListsController < ApplicationController
     @list = List.new(list_params)
     #3. データをデータベースに保存するためのsaveメソッド実行
     if @list.save
-      redirect_to list_path(@list_id)
+      redirect_to list_path(@list.id)
     #4. 詳細画面へリダイレクト
     else
       render :new
+    end
   end
 
   def index
@@ -38,9 +39,10 @@ class ListsController < ApplicationController
     list.update(list_params)
     redirect_to list_path(list.id)
   end
+
   private
   #ストロングパラメータ
   def list_params
-    params.require(:list).permit(:title,:body, :image)
+    params.require(:list).permit(:title, :body, :image)
   end
-end
+ end

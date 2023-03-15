@@ -1,5 +1,18 @@
 <h1>新規投稿</h1>
 
+ <!--エラーの内容が確認できるように-->
+<% if @list.errors.any? %>
+<!--errorsはモデルにバリエーションをかけた時エラー内容確認可能。any？と組み合わせてエラー発生しているか確認できる-->
+  <%= @list.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @list.errors.full_messages.each do |message| %>
+    <!--errorsとfull_messagesと組み合わせてエラー内容出力可能。エラー文は配列で保存されている→each使用-->
+     <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
 <!-- form_withにオプション追記 -->
 <%= form_with model: @list, url: '/lists', method: :post  do |f| %>
 
